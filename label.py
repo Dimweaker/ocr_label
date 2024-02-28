@@ -1,7 +1,7 @@
 import sys
-from PySide6 import QtCore, QtWidgets, QtGui
-from PySide6.QtWidgets import QApplication, QMessageBox, QStatusBar
-from PySide6.QtGui import QPixmap
+from PySide6 import QtCore, QtWidgets
+from PySide6.QtWidgets import QMessageBox
+from PySide6.QtGui import QPixmap, QIcon
 from ui_mainwindow import *
 from manager import *
 
@@ -13,6 +13,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.manager = Manager()
 
         self.imageLabel.setAlignment(QtCore.Qt.AlignCenter)
+
+        icon = QIcon('logo.bmp')
+        self.setWindowIcon(icon)
 
         self.lastButton.clicked.connect(self.last)
         self.nextButton.clicked.connect(self.next)
