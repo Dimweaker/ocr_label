@@ -98,7 +98,7 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"OCR\u8bc6\u522b\u6807\u6ce8 by HIT-DimWeaker", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u6807\u6ce8\u533a", None))
         self.imageLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u56fe\u7247</p></body></html>", None))
         self.saveButton.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58", None))
