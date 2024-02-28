@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(741, 457)
+        MainWindow.resize(741, 456)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.groupBox = QGroupBox(self.centralwidget)
@@ -83,6 +83,9 @@ class Ui_MainWindow(object):
         self.jumpButton = QPushButton(self.groupBox_3)
         self.jumpButton.setObjectName(u"jumpButton")
         self.jumpButton.setGeometry(QRect(580, 20, 51, 31))
+        self.openButton = QPushButton(self.groupBox_3)
+        self.openButton.setObjectName(u"openButton")
+        self.openButton.setGeometry(QRect(640, 20, 75, 31))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
@@ -114,5 +117,6 @@ class Ui_MainWindow(object):
         self.jumptextLabel.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8f6c\u7f16\u53f7\uff1a", None))
         self.lineEdit_2.setInputMask("")
         self.jumpButton.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8f6c", None))
+        self.openButton.setText(QCoreApplication.translate("MainWindow", u"\u672c\u5730\u67e5\u770b", None))
     # retranslateUi
 

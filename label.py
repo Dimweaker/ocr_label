@@ -1,4 +1,5 @@
 import sys
+import subprocess
 from PySide6 import QtCore, QtWidgets
 from PySide6.QtWidgets import QMessageBox
 from PySide6.QtGui import QPixmap, QIcon
@@ -24,6 +25,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.saveButton.clicked.connect(self.save)
         self.restoreButton.clicked.connect(self.restore)
         self.jumpButton.clicked.connect(self.jump)
+        self.openButton.clicked.connect(self.open)
 
         self.scaled_ratio = 1.0
 
@@ -119,6 +121,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             if self.scaled_ratio < 0.1:
                 self.scaled_ratio = 0.1
         self.show_image()
+
+    def open(self):
+        try:
+            subprocess.Popen(['start', self.manager.image_path], shell=True)
+        except Exception as e:
+            print(e)
+
 
 
 if __name__ == "__main__":
