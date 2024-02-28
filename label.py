@@ -22,6 +22,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.restoreButton.clicked.connect(self.restore)
         self.jumpButton.clicked.connect(self.jump)
 
+        self.scaled_ratio = 1.0
+
         self.show_data()
 
     def show_data(self, show_image=True):
@@ -46,9 +48,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         label_ratio = label_width / label_height
 
         if image_ratio >= label_ratio:
-            image = image.scaled(label_width, label_width / image_ratio)
+            image = image.scaled(label_width * self.scaled_ratio,
+                                 label_width / image_ratio * self.scaled_ratio)
         else:
-            image = image.scaled(label_height * image_ratio, label_height)
+            image = image.scaled(label_height * image_ratio * self.scaled_ratio,
+                                 label_height * self.scaled_ratio)
 
         self.imageLabel.setPixmap(image)
 
@@ -101,6 +105,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Return:
             self.save()
+
+    def wheelEvent(self, event):
+        if event.angleDelta().y() > 0:
+            self.scaled_ratio *= 1.1
+            if self.scaled_ratio > 1:
+                self.scaled_ratio = 1.0
+        else:
+            self.scaled_ratio /= 1.1
+            if self.scaled_ratio < 0.1:
+                self.scaled_ratio = 0.1
+        self.show_image()
 
 
 if __name__ == "__main__":
