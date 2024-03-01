@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>741</width>
-    <height>456</height>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>591</width>
-      <height>331</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="title">
@@ -58,7 +58,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>280</y>
+       <y>320</y>
        <width>431</width>
        <height>31</height>
       </rect>
@@ -68,7 +68,7 @@
      <property name="geometry">
       <rect>
        <x>490</x>
-       <y>280</y>
+       <y>320</y>
        <width>75</width>
        <height>31</height>
       </rect>
@@ -81,7 +81,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>240</y>
+       <y>280</y>
        <width>431</width>
        <height>31</height>
       </rect>
@@ -94,7 +94,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>250</y>
+       <y>290</y>
        <width>31</width>
        <height>16</height>
       </rect>
@@ -107,7 +107,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>290</y>
+       <y>330</y>
        <width>31</width>
        <height>16</height>
       </rect>
@@ -120,13 +120,65 @@
      <property name="geometry">
       <rect>
        <x>490</x>
-       <y>240</y>
+       <y>280</y>
        <width>75</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
       <string>还原</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="preEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>240</y>
+       <width>431</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>250</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>测：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="preLabel">
+     <property name="geometry">
+      <rect>
+       <x>515</x>
+       <y>230</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>置信</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="probLabel">
+     <property name="geometry">
+      <rect>
+       <x>493</x>
+       <y>250</y>
+       <width>71</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0.0</string>
      </property>
     </widget>
    </widget>
@@ -136,7 +188,7 @@
       <x>610</x>
       <y>10</y>
       <width>120</width>
-      <height>331</height>
+      <height>371</height>
      </rect>
     </property>
     <property name="title">
@@ -147,7 +199,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>350</y>
+      <y>390</y>
       <width>721</width>
       <height>61</height>
      </rect>

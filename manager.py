@@ -38,6 +38,10 @@ class Manager:
         else:
             self.changes = set()
 
+        with open('result.txt', 'r', encoding="utf-8") as f:
+            prediction = map(lambda x: x.strip().split('\t'), f.readlines())
+            self.prediction = {image_path: (text_label, score) for image_path, text_label, score in prediction}
+
         self.image_paths = list(self.new.keys())
         self.index = 0
 
@@ -100,3 +104,11 @@ class Manager:
     @property
     def text_label_origin(self) -> str:
         return self.origin[self.image_paths[self.index]]
+
+    @property
+    def prediction_text_label(self) -> str:
+        return self.prediction[self.image_paths[self.index]][0]
+
+    @property
+    def prediction_score(self) -> float:
+        return float(self.prediction[self.image_paths[self.index]][1])

@@ -14,6 +14,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.manager = Manager()
 
         self.imageLabel.setAlignment(QtCore.Qt.AlignCenter)
+        self.probLabel.setAlignment(QtCore.Qt.AlignCenter)
 
         icon = QIcon('logo.bmp')
         self.setWindowIcon(icon)
@@ -35,6 +36,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         image_path = self.manager.image_path
         text_label = self.manager.text_label
         text_label_origin = self.manager.text_label_origin
+        prediction_text_label = self.manager.prediction_text_label
+        prediction_score = self.manager.prediction_score
+        self.preEdit.setText(prediction_text_label)
+        self.probLabel.setText(f"{prediction_score:.4f}")
         self.originEdit.setText(text_label_origin)
         self.lineEdit.setText(text_label)
         self.statusBar().showMessage(
