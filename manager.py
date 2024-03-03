@@ -71,8 +71,10 @@ class Manager:
         return self.image_path
 
     def jump(self, image: str | int):
-        print(image)
         if isinstance(image, int):
+            image = self.image_paths[image]
+        if ':' in image:
+            image = int(image.split(':')[-1])
             image = self.image_paths[image]
         if image.isdigit():
             image = f"train/mg_crop_{image}.jpg"

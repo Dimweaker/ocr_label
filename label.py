@@ -43,7 +43,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.originEdit.setText(text_label_origin)
         self.lineEdit.setText(text_label)
         self.statusBar().showMessage(
-            f"{self.manager.index + 1}/{len(self.manager.image_paths)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}")
+            f"{self.manager.index + 1}/{len(self.manager.image_paths)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}"
+        )
         if show_image:
             self.show_image()
 
