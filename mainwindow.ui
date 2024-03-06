@@ -417,8 +417,32 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="action_local_save"/>
+    <addaction name="action_remote_save"/>
+    <addaction name="action_remote_load"/>
+   </widget>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_local_save">
+   <property name="text">
+    <string>保存到本地</string>
+   </property>
+  </action>
+  <action name="action_remote_save">
+   <property name="text">
+    <string>保存到服务器</string>
+   </property>
+  </action>
+  <action name="action_remote_load">
+   <property name="text">
+    <string>从服务器读取</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

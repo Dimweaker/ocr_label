@@ -11,20 +11,27 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
     QGroupBox, QLabel, QLineEdit, QMainWindow,
-    QMenuBar, QPushButton, QSizePolicy, QStatusBar,
-    QVBoxLayout, QWidget)
+    QMenu, QMenuBar, QPushButton, QSizePolicy,
+    QStatusBar, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(741, 497)
+        self.action_local_save = QAction(MainWindow)
+        self.action_local_save.setObjectName(u"action_local_save")
+        self.action_remote_save = QAction(MainWindow)
+        self.action_remote_save.setObjectName(u"action_remote_save")
+        self.action_remote_load = QAction(MainWindow)
+        self.action_remote_load.setObjectName(u"action_remote_load")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.groupBox = QGroupBox(self.centralwidget)
@@ -146,10 +153,17 @@ class Ui_MainWindow(object):
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 741, 22))
+        self.menu = QMenu(self.menubar)
+        self.menu.setObjectName(u"menu")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
+        self.menubar.addAction(self.menu.menuAction())
+        self.menu.addAction(self.action_local_save)
+        self.menu.addAction(self.action_remote_save)
+        self.menu.addAction(self.action_remote_load)
 
         self.retranslateUi(MainWindow)
 
@@ -158,6 +172,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"OCR\u8bc6\u522b\u6807\u6ce8 by HIT-DimWeaker", None))
+        self.action_local_save.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u5230\u672c\u5730", None))
+        self.action_remote_save.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58\u5230\u670d\u52a1\u5668", None))
+        self.action_remote_load.setText(QCoreApplication.translate("MainWindow", u"\u4ece\u670d\u52a1\u5668\u8bfb\u53d6", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"\u6807\u6ce8\u533a", None))
         self.imageLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u56fe\u7247</p></body></html>", None))
         self.saveButton.setText(QCoreApplication.translate("MainWindow", u"\u4fdd\u5b58", None))
@@ -189,5 +206,6 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setInputMask("")
         self.jumpButton.setText(QCoreApplication.translate("MainWindow", u"\u8df3\u8f6c", None))
         self.openButton.setText(QCoreApplication.translate("MainWindow", u"\u672c\u5730\u67e5\u770b", None))
+        self.menu.setTitle(QCoreApplication.translate("MainWindow", u"\u6587\u4ef6", None))
     # retranslateUi
 

@@ -23,10 +23,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.nextButton.clicked.connect(self.next)
         self.lastUButton.clicked.connect(self.last_unchanged)
         self.nextUButton.clicked.connect(self.next_unchanged)
-        self.saveButton.clicked.connect(self.save)
+        self.saveButton.clicked.connect(self.local_save)
         self.restoreButton.clicked.connect(self.restore)
         self.jumpButton.clicked.connect(self.jump)
         self.openButton.clicked.connect(self.open)
+        self.action_local_save.triggered.connect(self.local_save)
+        self.action_remote_load.triggered.connect(self.remote_load)
+        self.action_remote_save.triggered.connect(self.remote_save)
 
         self.scaled_ratio = 1.0
 
@@ -44,6 +47,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         symbol = self.manager.symbol
         space = self.manager.space
         clarity = self.manager.clarity
+        time = self.manager.time
+        user = self.manager.user
 
         self.uncertainBox.setChecked(uncertain)
         self.invalidBox.setChecked(invalid)
@@ -57,7 +62,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.originEdit.setText(text_label_origin)
         self.lineEdit.setText(text_label)
         self.statusBar().showMessage(
-            f"{self.manager.index + 1}/{len(self.manager.data)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}"
+            f"{self.manager.index + 1}/{len(self.manager.data)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}\t{user}\t{time}"
         )
         if show_image:
             self.show_image()
@@ -81,7 +86,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.imageLabel.setPixmap(image)
 
-    def save(self):
+    def local_save(self):
         text = self.lineEdit.text()
         uncertain = self.uncertainBox.isChecked()
         invalid = self.invalidBox.isChecked()
@@ -96,6 +101,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def restore(self):
         self.manager.restore()
         self.show_data(show_image=False)
+
+    def remote_load(self):
+        self.manager.remote_load()
+        self.show_data()
+
+    def remote_save(self):
+        self.manager.remote_save()
+        self.show_data()
 
     def next(self):
         if self.manager.index == len(self.manager.data) - 1:
@@ -145,7 +158,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         modifiers = event.modifiers()
         if modifiers == QtCore.Qt.ControlModifier:
             if event.key() == QtCore.Qt.Key_S:
-                self.save()
+                self.local_save()
             if event.key() == QtCore.Qt.Key_L:
                 self.restore()
 
