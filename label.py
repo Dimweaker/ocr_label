@@ -38,12 +38,26 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         text_label_origin = self.manager.text_label_origin
         prediction_text_label = self.manager.prediction_text_label
         prediction_score = self.manager.prediction_score
+        uncertain = self.manager.uncertain
+        invalid = self.manager.invalid
+        punctuation = self.manager.punctuation
+        symbol = self.manager.symbol
+        space = self.manager.space
+        clarity = self.manager.clarity
+
+        self.uncertainBox.setChecked(uncertain)
+        self.invalidBox.setChecked(invalid)
+        self.punctuationBox.setChecked(punctuation)
+        self.symbolBox.setChecked(symbol)
+        self.spaceBox.setChecked(space)
+        self.clarityBox.setCurrentIndex(clarity - 1)
+
         self.preEdit.setText(prediction_text_label)
         self.probLabel.setText(f"{prediction_score:.4f}")
         self.originEdit.setText(text_label_origin)
         self.lineEdit.setText(text_label)
         self.statusBar().showMessage(
-            f"{self.manager.index + 1}/{len(self.manager.image_paths)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}"
+            f"{self.manager.index + 1}/{len(self.manager.data)}\t{image_path}\tchanged: {self.manager.is_changed(self.manager.index)}"
         )
         if show_image:
             self.show_image()
@@ -68,15 +82,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.imageLabel.setPixmap(image)
 
     def save(self):
-        self.manager.change(self.lineEdit.text())
+        text = self.lineEdit.text()
+        uncertain = self.uncertainBox.isChecked()
+        invalid = self.invalidBox.isChecked()
+        punctuation = self.punctuationBox.isChecked()
+        symbol = self.symbolBox.isChecked()
+        space = self.spaceBox.isChecked()
+        clarity = self.clarityBox.currentIndex() + 1
+
+        self.manager.change(text, uncertain, invalid, punctuation, symbol, space, clarity)
         self.show_data(show_image=False)
 
     def restore(self):
         self.manager.restore()
-        self.show_data()
+        self.show_data(show_image=False)
 
     def next(self):
-        if self.manager.index == len(self.manager.image_paths) - 1:
+        if self.manager.index == len(self.manager.data) - 1:
             msg = QMessageBox()
             msg.setWindowTitle("Error")
             msg.setText("This is the last image")
@@ -104,7 +126,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.show_data()
 
     def jump(self):
-        image = self.lineEdit_2.text()
+        image = eval(self.lineEdit_2.text())
         if self.manager.jump(image) is not None:
             self.show_data()
         else:
@@ -113,9 +135,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             msg.setText(f"Image {image} not found")
             msg.exec()
 
+    def open(self):
+        try:
+            subprocess.Popen(['start', self.manager.image_path], shell=True)
+        except Exception as e:
+            print(e)
+
     def keyPressEvent(self, event):
-        if event.key() == QtCore.Qt.Key_Return:
-            self.save()
+        modifiers = event.modifiers()
+        if modifiers == QtCore.Qt.ControlModifier:
+            if event.key() == QtCore.Qt.Key_S:
+                self.save()
+            if event.key() == QtCore.Qt.Key_L:
+                self.restore()
 
     def wheelEvent(self, event):
         if event.angleDelta().y() > 0:
@@ -128,12 +160,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.scaled_ratio = 0.1
         self.show_image()
 
-    def open(self):
-        try:
-            subprocess.Popen(['start', self.manager.image_path], shell=True)
-        except Exception as e:
-            print(e)
-
+    def closeEvent(self, event):
+        self.manager.save()
+        event.accept()
 
 
 if __name__ == "__main__":

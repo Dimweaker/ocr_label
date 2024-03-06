@@ -15,9 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGroupBox, QLabel,
-    QLineEdit, QMainWindow, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFrame,
+    QGroupBox, QLabel, QLineEdit, QMainWindow,
+    QMenuBar, QPushButton, QSizePolicy, QStatusBar,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -72,6 +73,48 @@ class Ui_MainWindow(object):
         self.groupBox_2 = QGroupBox(self.centralwidget)
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.groupBox_2.setGeometry(QRect(610, 10, 120, 371))
+        self.verticalLayoutWidget = QWidget(self.groupBox_2)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 20, 111, 291))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.uncertainBox = QCheckBox(self.verticalLayoutWidget)
+        self.uncertainBox.setObjectName(u"uncertainBox")
+
+        self.verticalLayout.addWidget(self.uncertainBox)
+
+        self.invalidBox = QCheckBox(self.verticalLayoutWidget)
+        self.invalidBox.setObjectName(u"invalidBox")
+
+        self.verticalLayout.addWidget(self.invalidBox)
+
+        self.punctuationBox = QCheckBox(self.verticalLayoutWidget)
+        self.punctuationBox.setObjectName(u"punctuationBox")
+
+        self.verticalLayout.addWidget(self.punctuationBox)
+
+        self.symbolBox = QCheckBox(self.verticalLayoutWidget)
+        self.symbolBox.setObjectName(u"symbolBox")
+
+        self.verticalLayout.addWidget(self.symbolBox)
+
+        self.spaceBox = QCheckBox(self.verticalLayoutWidget)
+        self.spaceBox.setObjectName(u"spaceBox")
+
+        self.verticalLayout.addWidget(self.spaceBox)
+
+        self.clarityBox = QComboBox(self.groupBox_2)
+        self.clarityBox.addItem("")
+        self.clarityBox.addItem("")
+        self.clarityBox.addItem("")
+        self.clarityBox.addItem("")
+        self.clarityBox.addItem("")
+        self.clarityBox.setObjectName(u"clarityBox")
+        self.clarityBox.setGeometry(QRect(60, 328, 51, 22))
+        self.label_4 = QLabel(self.groupBox_2)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setGeometry(QRect(10, 330, 54, 16))
         self.groupBox_3 = QGroupBox(self.centralwidget)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.groupBox_3.setGeometry(QRect(10, 390, 721, 61))
@@ -124,7 +167,19 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"\u6d4b\uff1a", None))
         self.preLabel.setText(QCoreApplication.translate("MainWindow", u"\u7f6e\u4fe1", None))
         self.probLabel.setText(QCoreApplication.translate("MainWindow", u"0.0", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u9009\u9879\u533a", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"\u6807\u8bb0\u533a", None))
+        self.uncertainBox.setText(QCoreApplication.translate("MainWindow", u"\u4e0d\u786e\u5b9a", None))
+        self.invalidBox.setText(QCoreApplication.translate("MainWindow", u"\u65e0\u6548\u4fe1\u606f", None))
+        self.punctuationBox.setText(QCoreApplication.translate("MainWindow", u"\u6709\u6807\u70b9", None))
+        self.symbolBox.setText(QCoreApplication.translate("MainWindow", u"\u6709\u7279\u6b8a\u7b26\u53f7", None))
+        self.spaceBox.setText(QCoreApplication.translate("MainWindow", u"\u53ef\u80fd\u6709\u7a7a\u683c", None))
+        self.clarityBox.setItemText(0, QCoreApplication.translate("MainWindow", u"1", None))
+        self.clarityBox.setItemText(1, QCoreApplication.translate("MainWindow", u"2 ", None))
+        self.clarityBox.setItemText(2, QCoreApplication.translate("MainWindow", u"3", None))
+        self.clarityBox.setItemText(3, QCoreApplication.translate("MainWindow", u"4", None))
+        self.clarityBox.setItemText(4, QCoreApplication.translate("MainWindow", u"5", None))
+
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"\u6e05\u6670\u5ea6\uff1a", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"\u5207\u6362\u533a", None))
         self.lastButton.setText(QCoreApplication.translate("MainWindow", u"\u4e0a\u4e00\u5f20", None))
         self.nextButton.setText(QCoreApplication.translate("MainWindow", u"\u4e0b\u4e00\u5f20", None))
