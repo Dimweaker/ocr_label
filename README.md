@@ -1,5 +1,9 @@
 # OCR识别任务标注工具
 
+![image.png](asserts/image.png)
+
+
+
 ## 安装
 
 ### 环境要求
