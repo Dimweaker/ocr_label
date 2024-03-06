@@ -1,6 +1,4 @@
-import numpy as np
-import os
-import pandas as pd
+from pandas import read_csv
 
 DATA_PATH = 'data.csv'
 BOOL_COLS = ['uncertain', 'invalid', 'punctuation', 'symbol', 'space', 'change']
@@ -9,7 +7,7 @@ BOOL_COLS = ['uncertain', 'invalid', 'punctuation', 'symbol', 'space', 'change']
 class Manager:
 
     def __init__(self):
-        self.data = pd.read_csv(DATA_PATH, sep="\t", index_col=0, encoding="utf-8")
+        self.data = read_csv(DATA_PATH, sep="\t", index_col=0, encoding="utf-8")
         self.index = 0
 
     def __getattr__(self, item):
