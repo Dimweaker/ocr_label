@@ -239,6 +239,20 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QCheckBox" name="alienBox">
+        <property name="text">
+         <string>异形文字</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="traditionalBox">
+        <property name="text">
+         <string>繁体字</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
     <widget class="QComboBox" name="clarityBox">

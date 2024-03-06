@@ -46,6 +46,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         punctuation = self.manager.punctuation
         symbol = self.manager.symbol
         space = self.manager.space
+        alien = self.manager.alien
+        traditional = self.manager.traditional
         clarity = self.manager.clarity
         time = self.manager.time
         user = self.manager.user
@@ -55,6 +57,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.punctuationBox.setChecked(punctuation)
         self.symbolBox.setChecked(symbol)
         self.spaceBox.setChecked(space)
+        self.alienBox.setChecked(alien)
+        self.traditionalBox.setChecked(traditional)
         self.clarityBox.setCurrentIndex(clarity - 1)
 
         self.preEdit.setText(prediction_text_label)
@@ -161,6 +165,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.local_save()
             if event.key() == QtCore.Qt.Key_L:
                 self.restore()
+        if modifiers == QtCore.Qt.ControlModifier | QtCore.Qt.AltModifier:
+            if event.key() == QtCore.Qt.Key_Right:
+                self.next()
+            if event.key() == QtCore.Qt.Key_Left:
+                self.last()
 
     def wheelEvent(self, event):
         if event.angleDelta().y() > 0:

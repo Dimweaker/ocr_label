@@ -111,6 +111,16 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.spaceBox)
 
+        self.alienBox = QCheckBox(self.verticalLayoutWidget)
+        self.alienBox.setObjectName(u"alienBox")
+
+        self.verticalLayout.addWidget(self.alienBox)
+
+        self.traditionalBox = QCheckBox(self.verticalLayoutWidget)
+        self.traditionalBox.setObjectName(u"traditionalBox")
+
+        self.verticalLayout.addWidget(self.traditionalBox)
+
         self.clarityBox = QComboBox(self.groupBox_2)
         self.clarityBox.addItem("")
         self.clarityBox.addItem("")
@@ -190,6 +200,8 @@ class Ui_MainWindow(object):
         self.punctuationBox.setText(QCoreApplication.translate("MainWindow", u"\u6709\u6807\u70b9", None))
         self.symbolBox.setText(QCoreApplication.translate("MainWindow", u"\u6709\u7279\u6b8a\u7b26\u53f7", None))
         self.spaceBox.setText(QCoreApplication.translate("MainWindow", u"\u53ef\u80fd\u6709\u7a7a\u683c", None))
+        self.alienBox.setText(QCoreApplication.translate("MainWindow", u"\u5f02\u5f62\u6587\u5b57", None))
+        self.traditionalBox.setText(QCoreApplication.translate("MainWindow", u"\u7e41\u4f53\u5b57", None))
         self.clarityBox.setItemText(0, QCoreApplication.translate("MainWindow", u"1", None))
         self.clarityBox.setItemText(1, QCoreApplication.translate("MainWindow", u"2 ", None))
         self.clarityBox.setItemText(2, QCoreApplication.translate("MainWindow", u"3", None))

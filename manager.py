@@ -3,9 +3,6 @@ from configparser import ConfigParser
 from remote import Remote
 from datetime import datetime
 
-DATA_PATH = 'data.csv'
-BOOL_COLS = ['uncertain', 'invalid', 'punctuation', 'symbol', 'space', 'change']
-
 
 class Manager:
 
@@ -25,7 +22,7 @@ class Manager:
         self.bool_cols: list[str] = eval(conf.get('column', 'bool_cols'))
 
         self.data = read_csv(self.local_path, sep="\t", index_col=0, encoding="utf-8")
-        self.data["time"] = self.data["time"].astype("datetime64")
+        self.data["time"] = self.data["time"].astype("datetime64[ns]")
 
         self.index = 0
 
@@ -113,13 +110,16 @@ class Manager:
     def change(self, text: str,
                uncertain: bool = False, invalid: bool = False,
                punctuation: bool = False, symbol: bool = False,
-               space: bool = False, clarity: int = 5):
+               space: bool = False, alien: bool = False,
+               traditional: bool = False, clarity: int = 5):
         self.data.at[self.image_path, 'text_label_new'] = text
         self.data.at[self.image_path, 'uncertain'] = uncertain
         self.data.at[self.image_path, 'invalid'] = invalid
         self.data.at[self.image_path, 'punctuation'] = punctuation
         self.data.at[self.image_path, 'symbol'] = symbol
         self.data.at[self.image_path, 'space'] = space
+        self.data.at[self.image_path, 'alien'] = alien
+        self.data.at[self.image_path, 'traditional'] = traditional
         self.data.at[self.image_path, 'clarity'] = clarity
         self.data.at[self.image_path, 'change'] = True
         self.data.at[self.image_path, 'user'] = self.label_user
@@ -133,6 +133,8 @@ class Manager:
         self.data.at[self.image_path, 'punctuation'] = False
         self.data.at[self.image_path, 'symbol'] = False
         self.data.at[self.image_path, 'space'] = False
+        self.data.at[self.image_path, 'alien'] = False
+        self.data.at[self.image_path, 'traditional'] = False
         self.data.at[self.image_path, 'clarity'] = 5
         self.data.at[self.image_path, 'user'] = "baidu"
         self.data.at[self.image_path, 'time'] = datetime.now()
@@ -143,13 +145,13 @@ class Manager:
     def remote_load(self):
         self.remote.load_data(self.remote_path, self.buffer_path)
         buffer = read_csv(self.buffer_path, sep="\t", index_col=0, encoding="utf-8")
-        buffer["time"] = buffer["time"].astype("datetime64")
+        buffer["time"] = buffer["time"].astype("datetime64[ns]")
         self.data = self.data.combine(buffer, lambda x, y: x if x[-1] > y[-1] else y)
 
     def remote_save(self):
         self.remote.load_data(self.remote_path, self.buffer_path)
         buffer = read_csv(self.buffer_path, sep="\t", index_col=0, encoding="utf-8")
-        buffer["time"] = buffer["time"].astype("datetime64")
-        buffer.combine(self.data, lambda x, y: x if x[-1] > y[-1] else y).to_csv(self.buffer_path, sep="\t", encoding="utf-8")
+        buffer["time"] = buffer["time"].astype("datetime64[ns]")
+        buffer.combine(self.data, lambda x, y: x if x[-1] > y[-1] else y).to_csv(self.buffer_path, sep="\t",
+                                                                                 encoding="utf-8")
         self.remote.save_data(self.buffer_path, self.remote_path)
-

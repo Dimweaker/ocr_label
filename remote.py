@@ -1,6 +1,4 @@
 from paramiko import SSHClient, AutoAddPolicy
-from pandas import read_csv
-from io import StringIO
 
 class Remote:
     def __init__(self, host, user, password):
