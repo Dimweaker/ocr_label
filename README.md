@@ -2,8 +2,6 @@
 
 ![image.png](asserts/image.png)
 
-
-
 ## 安装
 
 ### 环境要求
@@ -44,6 +42,7 @@
 
 config.ini 配置如下
 
+```
 [user]
 label_user = User
 
@@ -59,6 +58,8 @@ buffer_path = buffer.csv
 
 [column]
 bool_cols = ['uncertain', 'invalid', 'punctuation', 'symbol', 'space', 'alien', 'traditional', 'change']
+```
+
 
 label_user为打标者的用户名，请自行修改
 [remote]部分为服务器信息，如无需使用服务器功能，则不用填写
@@ -184,13 +185,4 @@ label_user为打标者的用户名，请自行修改
 
 格式为
 当前图片序号/总图片数 图片地址 是否改变 署名 修改时间
-
-
-
-
-
-
-
-
-
 
